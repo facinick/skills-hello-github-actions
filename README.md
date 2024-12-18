@@ -1,36 +1,30 @@
-<header>
+### Shell (Program)
 
-# Hello GitHub Actions
+A `shell` is a program that runs commands and manages its own `environment`, including variables and functions. These settings are specific to the `shell` process and disappear once the `shell` is closed.
 
-_Create and run a GitHub Actions workflow._
+### **Binary** (Compiled Program):
 
-</header>
+You installed a binary. Binary is stored somewhere on your system. You have to tell this program(shell) that where this binary is on your system when you type it’s name to run it. You can do that by adding to a variable known as PATH of this program by doing 
 
-## Step 5: Trigger the workflow
+`export PATH="/test/path:$PATH"`  
 
-_You've now added a fully functioning workflow to your repository! :smile:_
+Now when you run the command, this program scans all paths in it’s PATH variable for this stupid binary, if found executes it.
 
-The shell script in the workflow will run whenever a new pull request is opened.
+### Script (Source Code):
 
-**Seeing your _action_ in action**: The status of each workflow run that's triggered is shown in the pull request before it's merged: look for **All checks have passed** when you try out the steps below. You can also see a list of all the workflows that are running, or have finished running, in the **Actions** tab of your repository. From there, you can click on each workflow run to view more details and access log files.
+You installed a scripted program like nvm but there is no binary.. it’s source code that needs to run through your program. Every-time you need this source code, you run it through your program.. It often contains commands that modify the `shell` environment (e.g., `export`, aliases, or functions). You can tell your program where this source code is by doing something like 
 
-![A screenshot of the Actions tab showing a list of workflow runs.](https://user-images.githubusercontent.com/16547949/62388049-4e64e600-b52a-11e9-8bf5-db0c5452360f.png)
+`source /path/to/script.sh`
 
-### :keyboard: Activity: Trigger the workflow
+### What Happens When the Shell Closes?
 
-1. Make a new branch named `test-workflow`.
-1. Make a change, such as adding an emoji to your README.md file, and commit the change directly to your new branch.
-1. In the **Pull requests** tab, create a pull request that will merge `test-workflow` into `main`.
-1. Watch the workflow running in the checks section of the pull request.
-1. Notice the comment that the workflow adds to the pull request.
-1. Wait about 20 seconds, then refresh this page (the one you're following instructions from). Another workflow will run and will replace the contents of this README file with instructions for the next step.
+As soon as your terminal closes, all these references to where binaries are stored, or where scripts are sourced from, are lost
 
-<footer>
+### So what to do?
 
----
+What to do? Every time the `shell` program starts, it runs an initialization file (like `~/.bashrc`, `~/.zshrc`, etc.) depending on the shell you're using. What if you write in this file, how to find the path to your binary, and/or also source to your scripts for you? Then Every-time your shell program opens, voila it automatically knows everything.
 
-Get help: [Post in our discussion board](https://github.com/orgs/skills/discussions/categories/hello-github-actions) &bull; [Review the GitHub status page](https://www.githubstatus.com/)
+### **In Summary**
 
-&copy; 2023 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
-
-</footer>
+- A `shell`, also known as the program, manages its own `environment`. Changes are temporary and only last for the duration of the shell session unless made persistent. These changes do not carry over to other shell sessions.
+- Add binary paths to `PATH` or source scripts in the shell's configuration file to ensure they are always available.
